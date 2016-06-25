@@ -2,13 +2,11 @@
 
 # Web Front-End Language (FEL)
 
-FEL (working title) is a work-in-progress language aiming to make working HTML, CSS and JavaScript less painful and increase
-productivity by creating simple underlying abstractions and allowing full introspection of HTML/CSS so that browser-specific bugs can
-be caught with user-code and so that CSS rules can be optimized to run faster in the browser without losing readability.
+FEL (working title) is a work-in-progress language aiming to make working HTML, CSS and JavaScript less painful. Increasing productivity by creating simple underlying abstractions. FEL allows full introspection of HTML/CSS, thus browser-specific bugs can be caught with user-code and CSS rules can be optimized to run faster in the browser without losing readability.
 
 # Modular HTML Components
 
-```
+```cpp
 def Banner
 {
 	layout
@@ -24,7 +22,7 @@ def Banner
 }
 ```
 
-```
+```cpp
 def Link
 {
 	properties
@@ -45,7 +43,7 @@ def Link
 
 # Template Code
 
-```
+```cpp
 layout
 {
 	div(class = "container")
@@ -70,7 +68,7 @@ layout
 ```
 
 Output:
-```
+```php
 <div class="container">
 	<a href="http://www.google.com.au">
 		My Link
@@ -88,7 +86,7 @@ Output:
 
 # Interfacing with backend code in a template
 
-```
+```cpp
 layout
 {
 	div(class = "container")
@@ -109,7 +107,7 @@ layout
 ```
 
 Output in PHP:
-```
+```php
 <div class="container">
 	<?php if ($Link): ?><a href="<?php echo $Link; ?>"><?php endif; ?>
 		My Link
@@ -126,7 +124,7 @@ Output in PHP:
 
 # Introspection rule
 
-```
+```cpp
 introspect 
 {
 	if (target.IE <= 9)
