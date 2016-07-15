@@ -19,6 +19,22 @@ def Banner
 			}
 		}
 	}
+
+	css 
+	{
+		// Poor example of actual CSS but oh well.
+		.banner {
+			position: relative
+			z-index: 0
+			width: 100%
+			max-width: 100%
+		}
+
+		.banner-inner {
+			width: 100%
+			max-width: 1920px
+		}
+	}
 }
 ```
 
@@ -86,6 +102,10 @@ Output:
 
 # Interfacing with backend code in a template
 
+The idea here is that any variable or function beginning with $ will generate the appropriate code based on a backend of your selection. Whether it be PHP, Ruby, JavaScript etc.
+
+I only have experience working with PHP templates however, so I'm not sure how implementing other languages would go.
+
 ```cpp
 layout
 {
@@ -124,6 +144,10 @@ Output in PHP:
 
 # Introspection rule
 
+The idea behind this is to allow a user to iterate over every HTML element in a flat list, check computed CSS values and take an appropriate action, such as throw an error, modify/remove the element, etc.
+
+The user could also iterate over each CSS rule, check the selectors of each rule and remove selectors/rules that don't have any matching HTML.
+
 ```cpp
 introspect 
 {
@@ -144,11 +168,18 @@ introspect
 	// Remove all un-used CSS rules in HTML
 	// Alternatively you could make the compiler throw a warning maybe to avoid unnecessary
 	// code entering production.
-	for (css as selector)
+	for (css as rule)
 	{
-		if (!html.find(selector))
+		for (rule as selector)
 		{
-			css.remove(selector);
+			if (!html.find(selector))
+			{
+				rule.remove(selector)
+			}
+		}
+		if (len(rule) == 0)
+		{
+			css.remove(rule);
 		}
 	}
 }
